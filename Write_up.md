@@ -98,6 +98,7 @@ Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchE
   ```
   
  #### GetRbgPrime() Function  #### 
+ ![G](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/G.png)
   ```
  MatrixXf RbgPrime = GetRbgPrime(rollEst, pitchEst, ekfState(6));
 
@@ -160,14 +161,7 @@ void QuadEstimatorEKF::UpdateFromMag(float magYaw)
 
   MatrixXf hPrime(1, QUAD_EKF_NUM_STATES);
   hPrime.setZero();
-
-  // MAGNETOMETER UPDATE
-  // Hints: 
-  //  - Your current estimated yaw can be found in the state vector: ekfState(6)
-  //  - Make sure to normalize the difference between your measured and estimated yaw
-  //    (you don't want to update your yaw the long way around the circle)
-  //  - The magnetomer measurement covariance is available in member variable R_Mag
-  ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
  zFromX=ekfState(6);
  hPrime=(0,6)=1;
 
