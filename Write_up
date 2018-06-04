@@ -1,22 +1,20 @@
-# Estimation Project #
+#Estimation Project#
 
 This README is broken down into the following sections:
 
- - [Setup](#setup) - the environment and code setup required to get started and a brief overview of the project structure
- - [Code](#Code) - the code of this project
- - [The Tasks AND the Project Rubric](#the-tasks) - the tasks you will need to complete for the project
- - [Submission](#submission) - overview of the requirements for your project submission
+- [Setup](#setup) - the environment and code setup required to get started and a brief overview of the project structure
+- [Code](#Code) - the code of this project
+- [The Tasks AND the Project Rubric](#the-tasks) - the tasks you will need to complete for the project
+- [Submission](#submission) - overview of the requirements for your project submission
 
 
-## Setup ##
+### Setup ##
 
 This project will continue to use the C++ development environment you set up in the Controls C++ project.
 
  1. Clone the repository
- ```
- git clone https://github.com/udacity/FCND-Estimation-CPP.git
- ```
-
+ `git clone https://github.com/udacity/FCND-Estimation-CPP.git`
+ 
  2. Import the code into IDE like done in the [Controls C++ project](https://github.com/udacity/FCND-Controls-CPP#development-environment-setup)
  
  3. Compile and run the estimation simulator just as you did in the controls project
