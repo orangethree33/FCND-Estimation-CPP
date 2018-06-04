@@ -48,13 +48,11 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
     ekfState(6) += 2.f*F_PI;
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
-
-
 ```
 FromEuler123_RPY Funtion()
-```
 
-Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
+
+`Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
   //EKF vector [x,y,z,x_dot,y_dot,z_dot,psi]
@@ -68,9 +66,9 @@ Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchE
   PredictState(4)=curState(4)+acc_RBI.y*dt;
   //PredictState(5)=curState(5)+acc_RBI.z*dt;
   PredictState(4)=curState(4)+acc_RBI.z*dt;-CONST_GRAVITY*dt; 
-  /////////////////////////////// END STUDENT CODE ////////////////////////////
+  /////////////////////////////// END STUDENT CODE ////////////////////////////`
   
- ```
+
  
  ```
  MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
