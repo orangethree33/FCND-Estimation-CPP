@@ -23,6 +23,7 @@ This project will continue to use the C++ development environment you set up in 
 
 ## Code ##
 #### UpdateFromIMU() Function ####
+![]()
 ```
 void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 {
@@ -72,6 +73,7 @@ Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchE
  
  ```
   #### GetRbgPrime() Function ####
+  ![]()
   ```
  MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
 {
@@ -194,6 +196,7 @@ Project outline:
 
 
 ### Step 2: Sensor Noise ###
+![]()
 
 For the controls project, the simulator was working with a perfect set of sensors, meaning none of the sensors had any noise.  The first step to adding additional realism to the problem, and developing an estimator, is adding noise to the quad's sensors.
 
