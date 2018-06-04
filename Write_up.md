@@ -13,14 +13,16 @@ This README is broken down into the following sections:
 This project will continue to use the C++ development environment you set up in the Controls C++ project.
 
  1. Clone the repository
- `git clone https://github.com/udacity/FCND-Estimation-CPP.git`
+ ```
+ git clone https://github.com/udacity/FCND-Estimation-CPP.git
+ ```
  
  2. Import the code into IDE like done in the [Controls C++ project](https://github.com/udacity/FCND-Controls-CPP#development-environment-setup)
  
  3. Compile and run the estimation simulator just as you did in the controls project
 
 ## Code ##
-UpdateFromIMU() Function
+#### UpdateFromIMU() Function ####
 ```
 void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 {
@@ -47,10 +49,10 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 ```
-FromEuler123_RPY Funtion()
+#### FromEuler123_RPY Function() ####
+```
 
-
-`Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
+Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
   //EKF vector [x,y,z,x_dot,y_dot,z_dot,psi]
@@ -69,6 +71,8 @@ FromEuler123_RPY Funtion()
 
  
  ```
+  #### GetRbgPrime() Function ####
+  ```
  MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
 {
  
@@ -91,6 +95,7 @@ FromEuler123_RPY Funtion()
   return RbgPrime;
   ```
   
+ #### GetRbgPrime() Function  #### 
   ```
  MatrixXf RbgPrime = GetRbgPrime(rollEst, pitchEst, ekfState(6));
 
@@ -110,6 +115,8 @@ FromEuler123_RPY Funtion()
   ekfState = newState;
 }
 ```
+#### UpdateFromGPS() Function #### 
+```
 void QuadEstimatorEKF::UpdateFromGPS(V3F pos, V3F vel)
 {
   VectorXf z(6), zFromX(6);
@@ -124,13 +131,13 @@ void QuadEstimatorEKF::UpdateFromGPS(V3F pos, V3F vel)
   hPrime.setZero();
 ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
   //zFromX(0)=z(0);
-  zFromX(0)=(0);
-  zFromX(1)=z(1);
-  zFromX(2)=z(2);
-  zFromX(3)=z(3);
-  zFromX(4)=z(4);
-  zFromX(5)=z(5);
-  zFromX(6)=z(6);
+  zFromX(0)=ekfState(0);
+  zFromX(1)=ekfState(1);
+  zFromX(2)=ekfState(2);
+  zFromX(3)=ekfState(3);
+  zFromX(4)=ekfState(4);
+  zFromX(5)=ekfState(5);
+  zFromX(6)=ekfState(6);
 
   for (int i=0;i<6;i++)
     {
@@ -142,6 +149,7 @@ void QuadEstimatorEKF::UpdateFromGPS(V3F pos, V3F vel)
   Update(z, hPrime, R_GPS, zFromX);
 }
 ```
+#### UpdateFromMag() Fuction
 ```
 void QuadEstimatorEKF::UpdateFromMag(float magYaw)
 {
