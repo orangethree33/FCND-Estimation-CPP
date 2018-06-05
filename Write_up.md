@@ -211,7 +211,7 @@ Project outline:
 1. Run the simulator in the same way
 Choose scenario `06_NoisySensors`.,This is scenario6.gif running on my vs
 2. Run the simulator. 
-![ch6]()
+![ch6](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH6.gif)
 
 
 ### Step 3: Attitude Estimation ###
@@ -220,7 +220,7 @@ Choose scenario `06_NoisySensors`.,This is scenario6.gif running on my vs
 
 1. Run scenario `07_AttitudeEstimation`.  
 2. This is scenario7.gif running on vs
-![ch7]()
+![ch7](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH7.gif)
 
 
 
@@ -229,14 +229,14 @@ Choose scenario `06_NoisySensors`.,This is scenario6.gif running on my vs
 
 1. Run scenario `08_PredictState`.  
 2. In `QuadEstimatorEKF.cpp`, implement the state prediction step in the `PredictState()` functon. 
-![]()
+![ch8](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH8.gif)
 
 3. Now let's introduce a realistic IMU, one with noise.  Run scenario `09_PredictionCov`. You will see a small fleet of quadcopter all using your prediction code to integrate forward. You will see two plots:
    - The top graph shows 10 (prediction-only) position X estimates
    - The bottom graph shows 10 (prediction-only) velocity estimates
 You will notice however that the estimated covariance (white bounds) currently do not capture the growing errors.
 this is scenario9.gif 
-
+![ch9](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH9.gif)
 
 
 
@@ -254,7 +254,9 @@ this is scenario9.gif
 
 1. Run scenario `10_MagUpdate`.  This scenario uses a realistic IMU, but the magnetometer update hasn’t been implemented yet. As a result, you will notice that the estimate yaw is drifting away from the real value (and the estimated standard deviation is also increasing).  Note that in this case the plot is showing you the estimated yaw error (`quad.est.e.yaw`), which is drifting away from zero as the simulation runs.  You should also see the estimated standard deviation of that state (white boundary) is also increasing.
 
-2. Tune the parameter `QYawStd` (`QuadEstimatorEKF.txt`) for the QuadEstimatorEKF so that it approximately captures the magnitude of the drift, as demonstrated here:
+2. Tune the parameter `QYawStd` (`QuadEstimatorEKF.txt`) for the QuadEstimatorEKF so that it approximately captures the magnitude of the drift.
+this is the scenario10.gif
+![ch10](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH10.gif)
 
 
 
@@ -270,7 +272,7 @@ this is scenario9.gif
 #SimIMU.AccelStd = 0,0,0
 #SimIMU.GyroStd = 0,0,0
 ```
-![ch11]()
+![ch11](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH11.gif)
 
 
 
@@ -284,8 +286,6 @@ For this project,I  need to submit:
  - a completed estimator that meets the performance criteria for each of the steps by submitting:
    - `QuadEstimatorEKF.cpp`
    - `config/QuadEstimatorEKF.txt`
-
- - a re-tuned controller that, in conjunction with the tuned estimator, is capable of meeting the criteria laid out in Step 6 by submitting:
    - `QuadController.cpp`
    - `config/QuadControlParams.txt`
 
