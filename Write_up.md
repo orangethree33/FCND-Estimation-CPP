@@ -239,14 +239,14 @@ In this steps,we need to write the code of UpDateIMU,the only thing I need is to
 
 1. Run scenario `08_PredictState`.  
 2. In `QuadEstimatorEKF.cpp`, implement the state prediction step in the `PredictState()` functon. 
-![ch8](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH8.gif)
+
 
 3. Now let's introduce a realistic IMU, one with noise.  Run scenario `09_PredictionCov`. You will see a small fleet of quadcopter all using your prediction code to integrate forward. You will see two plots:
    - The top graph shows 10 (prediction-only) position X estimates
    - The bottom graph shows 10 (prediction-only) velocity estimates
 You will notice however that the estimated covariance (white bounds) currently do not capture the growing errors.
 this is scenario9.gif 
-![ch9](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH9.gif)
+
 
 
 
@@ -266,7 +266,7 @@ this is scenario9.gif
 
 2. Tune the parameter `QYawStd` (`QuadEstimatorEKF.txt`) for the QuadEstimatorEKF so that it approximately captures the magnitude of the drift.
 this is the scenario10.gif
-![ch10](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH10.gif)
+
 
 
 
@@ -282,7 +282,7 @@ this is the scenario10.gif
 #SimIMU.AccelStd = 0,0,0
 #SimIMU.GyroStd = 0,0,0
 ```
-![ch11](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH11.gif)
+
 
 
 
