@@ -108,8 +108,9 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 	r(2, 0) = 0; r(2, 1) = sin(phi) / cos(theta); r(2, 2) = cos(phi) / cos(theta);
 
 	V3F e_angle_dot = r * gyro;
-	float predictedPitch = pitchEst + dtIMU * gyro.y;
-	float predictRoll = rollEst + dtIMU * gyro.x;
+	float predictedPitch = pitchEst + dtIMU * e_angle_dot.y;
+	float predictedRoll = rollEst + dtIMU * e_angle_dot.x;
+	ekfState(6) = ekfState(6) + dtIMU * e_angle_dot.z;
 
 
 
@@ -126,7 +127,7 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 	accelPitch = atan2f(-accel.x, 9.81f);
 
 	// FUSE INTEGRATION AND UPDATE
-	rollEst = attitudeTau / (attitudeTau + dtIMU) * (predictRoll)+dtIMU / (attitudeTau + dtIMU) * accelRoll;
+	rollEst = attitudeTau / (attitudeTau + dtIMU) * (predictedRoll)+dtIMU / (attitudeTau + dtIMU) * accelRoll;
 	pitchEst = attitudeTau / (attitudeTau + dtIMU) * (predictedPitch)+dtIMU / (attitudeTau + dtIMU) * accelPitch;
 
 	lastGyro = gyro;
@@ -190,7 +191,7 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
 	predictedState(3) = curState(3) + acc_RBI.x*dt;
 	predictedState(4) = curState(4) + acc_RBI.y*dt;
 	//PredictState(5)=curState(5)+acc_RBI.z*dt;
-	predictedState(5) = curState(5) + acc_RBI.z*dt; -CONST_GRAVITY * dt;
+	predictedState(5) = curState(5) + acc_RBI.z*dt - CONST_GRAVITY * dt;
 
 
 
@@ -289,7 +290,7 @@ void QuadEstimatorEKF::Predict(float dt, V3F accel, V3F gyro)
 
 
 
-	ekfCov = gPrime * ekfCov*gPrime.transpose()+ Q;
+	ekfCov = gPrime * ekfCov*gPrime.transpose() + Q;
 	/////////////////////////////// END STUDENT CODE ////////////////////////////
 
 	ekfState = newState;
@@ -354,14 +355,15 @@ void QuadEstimatorEKF::UpdateFromMag(float magYaw)
 
 	float differ = magYaw - ekfState(6);
 	if (differ < -F_PI) {
-       zFromX(0) = zFromX(0) - 2.f*F_PI;
-       } else if (differ > F_PI){
-	   
+		zFromX(0) = zFromX(0) - 2.f*F_PI;
+	}
+	else if (differ > F_PI) {
+
 		zFromX(0) = zFromX(0) + 2.f*F_PI;
 	}
 
 
-	hPrime (0, 6) = 1;
+	hPrime(0, 6) = 1;
 
 	/////////////////////////////// END STUDENT CODE ////////////////////////////
 
