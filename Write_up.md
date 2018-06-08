@@ -40,8 +40,9 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
   r(2,0)=0; r(2,1)=sin(phi)/cos(theta); r(2,2)=cos(phi)/cos(theta);
 
   V3F e_angle_dot=r*gyro;
-  float predictedPitch=pitchEst+dtIMU*gyro.y;
-  float predictRoll=rollEst+dtIMU*gyro.x;
+	 float predictedPitch = pitchEst + dtIMU * e_angle_dot.y;
+	 float predictedRoll = rollEst + dtIMU * e_angle_dot.x;
+	 ekfState(6) = ekfState(6) + dtIMU * e_angle_dot.z;
  // normalize yaw to -pi .. pi
   if (ekfState(6) > F_PI) 
     ekfState(6) -= 2.f*F_PI;
