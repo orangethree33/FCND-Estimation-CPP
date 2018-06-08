@@ -57,16 +57,15 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
 Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-  predictedState(0) = curState(0) + curState(3)*dt;
-  predictedState(1) = curState(1) + curState(4)*dt;
-  predictedState(2) = curState(2) + curState(5)*dt;
+ Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, ekfState(6));
+ attitude.IntegrateBodyRate(gyro,dtIMU);
+ float predictedPitch = attitude.Pitch();
+ float predictedRoll = attitude.Roll();
+ ekfState(6) = attitude.Yaw();
+ // normalize yaw to -pi .. pi
+ if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
+ if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
 
-  V3F acc_RBI = attitude.Rotate_BtoI(accel);
-
-  predictedState(3) = curState(3) + acc_RBI.x*dt;
-  predictedState(4) = curState(4) + acc_RBI.y*dt;
-  //PredictState(5)=curState(5)+acc_RBI.z*dt;
-  predictedState(5) = curState(5) + acc_RBI.z*dt; -CONST_GRAVITY * dt;
  
   /////////////////////////////// END STUDENT CODE ////////////////////////////`
   
@@ -219,13 +218,17 @@ change the parameters
 ### Step 3: Attitude Estimation ###
 In this steps,we need to write the code of UpDateIMU,the only thing I need is to intergrate the parameter of gyroscope in the estimated roll and pitch.
 ```
+Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, ekfState(6));
+attitude.IntegrateBodyRate(gyro,dtIMU);
+float predictedPitch = attitude.Pitch();
+float predictedRoll = attitude.Roll();
+ekfState(6) = attitude.Yaw();
+// normalize yaw to -pi .. pi
+if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
+if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
 
-  V3F e_angle_dot=r*gyro;
-	 float predictedPitch = pitchEst + dtIMU * e_angle_dot.y;
-	 float predictedRoll = rollEst + dtIMU * e_angle_dot.x;
-	 ekfState(6) = ekfState(6) + dtIMU * e_angle_dot.z;
 ```
-![r](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/Mat3x3F_r.jpg)
+![r]()
 
 
 1. Run scenario `07_AttitudeEstimation`.  
