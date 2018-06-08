@@ -228,17 +228,24 @@ if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
 if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
 
 ```
-![r]()
-
+(during the studying time ,I try a lot of methods and I met a lot of problems,thanks to mentor and some teachers)
+create a rotation matrix based on your current Euler angles, integrate that, convert back to Euler angles
+	//    OR 
+	//    2) use the Quaternion<float> class, which has a handy FromEuler123_RPY function for creating a quaternion from Euler Roll/PitchYaw
+	//       (Quaternion<float> also has a IntegrateBodyRate function, though this uses quaternions, not Euler angles)
+I try the first one in the first time,first I think to find the roll,pitch,and also yaw derivates using the equations that I had showed in the Code part,and then when I the derivates,I think I supposed to multiply it through dt ,but somehow I failed ,still, I did not figute it out.so my teachers give me another to solve it.
+well,it works well. 
 
 1. Run scenario `07_AttitudeEstimation`.  
 2. This is scenario7.gif running on vs
-![ch7]()
+![ch7](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/NCH7.gif)
+and this is the result
+![result](https://github.com/orangethree33/FCND-Estimation-CPP/tree/master/images)
 
 
 
 ### Step 4: Prediction Step ###
-
+This has been sperated in two parts,so 
 
 1. Run scenario `08_PredictState`.  
 2. In `QuadEstimatorEKF.cpp`, implement the state prediction step in the `PredictState()` functon. 
