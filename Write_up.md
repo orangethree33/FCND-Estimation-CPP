@@ -205,23 +205,32 @@ Project outline:
 
 
 ### Step 2: Sensor Noise ###
-![orig](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/simulator.png)
-
-
-
+![orig]()
+it is the scenario 06_SensorNoise.when the simulator runs,we can see the two files which is in/config/Graph1 and /Graph2 then we use the math to calculate the value of parameters .
+The video is following,when the scenario passed the test,I can see the lines outputs on the terminal 
 1. Run the simulator in the same way
 Choose scenario `06_NoisySensors`.,This is scenario6.gif running on my vs
+change the parameters
 2. Run the simulator. 
-![ch6](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH6.gif)
+![ch6](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/06.png)
+![ch6](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/06result.png)
 
 
 ### Step 3: Attitude Estimation ###
+In this steps,we need to write the code of UpDateIMU,the only thing I need is to intergrate the parameter of gyroscope in the estimated roll and pitch.
+```
 
+  V3F e_angle_dot=r*gyro;
+	 float predictedPitch = pitchEst + dtIMU * e_angle_dot.y;
+	 float predictedRoll = rollEst + dtIMU * e_angle_dot.x;
+	 ekfState(6) = ekfState(6) + dtIMU * e_angle_dot.z;
+```
+![r](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/Mat3x3F_r.jpg)
 
 
 1. Run scenario `07_AttitudeEstimation`.  
 2. This is scenario7.gif running on vs
-![ch7](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/CH7.gif)
+![ch7]()
 
 
 
