@@ -279,6 +279,8 @@ this is scenario9.gif
 
 2. Tune the parameter `QYawStd` (`QuadEstimatorEKF.txt`) for the QuadEstimatorEKF so that it approximately captures the magnitude of the drift.
 this is the scenario10.gif
+this is the problem that I met,I can't fix until now 
+![nch10]()
 
 
 
