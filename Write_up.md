@@ -245,10 +245,12 @@ and this is the result
 
 
 ### Step 4: Prediction Step ###
-This has been sperated in two parts,so 
+This has been sperated in two parts.
 
 1. Run scenario `08_PredictState`.  
 2. In `QuadEstimatorEKF.cpp`, implement the state prediction step in the `PredictState()` functon. 
+this is scenario.gif
+![nch8](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/NCH8.gif)
 
 
 3. Now let's introduce a realistic IMU, one with noise.  Run scenario `09_PredictionCov`. You will see a small fleet of quadcopter all using your prediction code to integrate forward. You will see two plots:
@@ -256,6 +258,7 @@ This has been sperated in two parts,so
    - The bottom graph shows 10 (prediction-only) velocity estimates
 You will notice however that the estimated covariance (white bounds) currently do not capture the growing errors.
 this is scenario9.gif 
+![nch9](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/NCH9.gif)
 
 
 
@@ -286,13 +289,18 @@ this is the scenario10.gif
 1. Run scenario `11_GPSUpdate`.  At the moment this scenario is using both an ideal estimator and and ideal IMU.  Even with these ideal elements, watch the position and velocity errors (bottom right). As you see they are drifting away, since GPS update is not yet implemented.
 
 2. Let's change to using your estimator by setting `Quad.UseIdealEstimator` to 0 in `config/11_GPSUpdate.txt`.  Rerun the scenario to get an idea of how well your estimator work with an ideal IMU.
+```
+Quad.UseIdealEstimator = 0
+```
 
 3. Now repeat with realistic IMU by commenting out these lines in `config/11_GPSUpdate.txt`:
 ```
 #SimIMU.AccelStd = 0,0,0
 #SimIMU.GyroStd = 0,0,0
-```
 
+```
+this is the scenario.11 gif
+![nch11](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/images/NCH11.gif)
 
 
 
@@ -301,13 +309,14 @@ this is the scenario10.gif
 
 ## Submission ##
 
-For this project,I  need to submit:
+For this project,the files that I would  submit:
 
  - a completed estimator that meets the performance criteria for each of the steps by submitting:
    - `QuadEstimatorEKF.cpp`
    - `config/QuadEstimatorEKF.txt`
    - `QuadController.cpp`
    - `config/QuadControlParams.txt`
+   
 
 
 
