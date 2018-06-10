@@ -169,16 +169,13 @@ void QuadEstimatorEKF::UpdateFromMag(float magYaw)
   hPrime.setZero();
 ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 //normalize the difference between the measured and the estmated
-  zFromX(0) = ekfState(6);
+        hPrime(0, 6) = 1;
+	zFromX = hPrime * ekfState(6);
 
-  float differ = magYaw - ekfState(6);
-  if (differ < -F_PI) {
-       zFromX(0) = zFromX(0) - 2.f*F_PI;
-       } else if (differ > F_PI){
-     
-    zFromX(0) = zFromX(0) + 2.f*F_PI;
-  }
-
+	VectorXf yaw_error = z - zFromX;
+	
+	if (yaw_error(0) > F_PI)z(0) -= 2.f*F_PI;
+	if (yaw_error(0) < -F_PI) z(0) += 2.f*F_PI;
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   Update(z, hPrime, R_Mag, zFromX);
@@ -278,9 +275,12 @@ this is scenario9.gif
 1. Run scenario `10_MagUpdate`.  This scenario uses a realistic IMU, but the magnetometer update hasn’t been implemented yet. As a result, you will notice that the estimate yaw is drifting away from the real value (and the estimated standard deviation is also increasing).  Note that in this case the plot is showing you the estimated yaw error (`quad.est.e.yaw`), which is drifting away from zero as the simulation runs.  You should also see the estimated standard deviation of that state (white boundary) is also increasing.
 
 2. Tune the parameter `QYawStd` (`QuadEstimatorEKF.txt`) for the QuadEstimatorEKF so that it approximately captures the magnitude of the drift.
+after getting the reviews I adjust my code
 this is the scenario10.gif
-this is the problem that I met,I can't fix until now ,the Qyawstd,I can not find the right value.
-![nch10](https://github.com/orangethree33/FCND-Estimation-CPP/blob/master/NCH10.gif)
+![NCH10]()
+
+
+
 
 
 
